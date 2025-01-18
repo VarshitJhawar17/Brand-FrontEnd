@@ -58,16 +58,17 @@
 
 
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaGooglePay, FaPaypal, FaCashRegister } from 'react-icons/fa';
 import { SiPhonepe, SiPaytm } from 'react-icons/si';
 import { BsBank } from 'react-icons/bs';
 import Title from '../Components/Title';
 import CartTotal from '../Components/CartTotal';
+import { ShopContext } from '../Context/ShopContext';
 
 function PlaceOrder() {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
-
+  const {navigate} =useContext(ShopContext)
   const handlePaymentSelection = (method) => {
     setSelectedPaymentMethod(method);
   };
@@ -134,7 +135,11 @@ function PlaceOrder() {
 
       {/* Right Side: Payment Gateway */}
       <div className="flex flex-col gap-6 w-full sm:max-w-[480px]">
-        <div className="text-xl sm:text-2xl font-bold mb-3">
+        <div className="mt-6">
+          <CartTotal />
+        </div>
+
+        <div className="flex items-center text-xl sm:text-2xl font-bold mt-3">
           <Title text1="PAYMENT" text2="METHOD" />
         </div>
         <div className="grid grid-cols-1 gap-4">
@@ -193,7 +198,7 @@ function PlaceOrder() {
           className="mt-6 w-full py-3 px-4 bg-black text-white rounded-md hover:bg-gray-800 transition"
           onClick={() => {
             if (selectedPaymentMethod) {
-              alert(`You have selected: ${selectedPaymentMethod}`);
+              navigate("/Orders")
             } else {
               alert('Please select a payment method before proceeding.');
             }
@@ -202,9 +207,7 @@ function PlaceOrder() {
           Confirm and Place Order
         </button>
 
-        <div className="mt-6">
-          <CartTotal />
-        </div>
+        
       </div>
     </div>
   );
