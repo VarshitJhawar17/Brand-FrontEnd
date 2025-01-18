@@ -8,7 +8,7 @@ import CartTotal from '../Components/CartTotal'
 
 function Cart() {
 
-  const {products , currency, CartItem, UpdateQuantity} = useContext(ShopContext)
+  const {products , currency, CartItem, UpdateQuantity, navigate} = useContext(ShopContext)
 
   const [CartData, setCartData] = useState([])
   useEffect(() => {
@@ -60,6 +60,9 @@ function Cart() {
       <div className='flex justify-end my-20'>
         <div className='w-full sm:w-[450px]'>
           <CartTotal />
+          <div className='w-full text-end'>
+            <button onClick={() =>  navigate('/PlaceOrder')} className='bg-black text-white text-sm my-8  px-8 py-3 '>PROCEED TO PAYMNT</button>
+          </div>
         </div>
       </div>
     </div>
